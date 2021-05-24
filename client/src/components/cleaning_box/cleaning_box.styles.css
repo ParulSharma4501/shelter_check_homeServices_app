@@ -38,3 +38,33 @@
 .buttonb:hover {
   background-color: #018559;
 }
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .CleaningBox {
+    width: 100vw;
+    background-image: url("../../assets//white4.png");
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .imgggg {
+    margin: auto;
+    border-radius: 50%;
+  }
+  .headinggg {
+    margin: auto;
+    margin-top: 30px;
+    color: gray;
+  }
+  .content {
+    margin-left: -5%;
+  }
+
+  .buttonb {
+    margin: auto;
+    color: black;
+    background-color: #ffffff;
+    margin-top: 5%;
+  }
+}

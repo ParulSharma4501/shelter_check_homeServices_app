@@ -27,3 +27,12 @@
 .offer_image {
   object-fit: contain;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .offer_card {
+    margin: auto;
+    margin-bottom: 7%;
+  }
+}

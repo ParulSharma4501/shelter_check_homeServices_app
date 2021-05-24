@@ -26,3 +26,11 @@
   width: 100%;
   margin-left: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .cleaning_image_card {
+    margin: auto;
+  }
+}

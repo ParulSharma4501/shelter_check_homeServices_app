@@ -5,20 +5,18 @@ import GadgetBox from "../../components/gadget_box/gadget_box.component";
 
 import "./gadget_main_page.styles.css";
 
-const GadgetMainPage = (props) => {
-    console.log(props);
+const GadgetMainPage = ({CommonGadgetProps}) => {
+  console.log(CommonGadgetProps);
 
-    return (
-
+  return (
     <div className="GadgetMainPage">
-        <div class="flex-containerg">
-            <div>
-                    <GadgetBox typ={props.typee}/>
-            </div>
-</div>
-       
-       
+      <div class="flex-containerg">
+        <div>
+          <GadgetBox CommonGadgetProps={ CommonGadgetProps} />
+        </div>
+      </div>
     </div>
-)}
+  );
+};
 
 export default GadgetMainPage;

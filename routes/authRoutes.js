@@ -5,6 +5,10 @@ const e = require("express");
 
 const User = mongoose.model("users");
 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 module.exports = (app) => {
   app.get(
     "/auth/google",
@@ -13,52 +17,57 @@ module.exports = (app) => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/login");
+    }
+  );
 
   app.get("/api/current_user", (req, res) => {
-    res.send(req.user);
+    // console.log(res);
+    return res.send({
+      user: req.user,
+      msg: null,
+    });
   });
 
   app.post("/api/register", async (req, res, done) => {
     const existingUser = await User.findOne({ email: req.body.email });
-
     if (existingUser) {
-      console.log("User Already Registered!!");
-      return done(null, existingUser);
+      return res.json({
+        msg: "You are already registered please login",
+        user: null,
+      });
     }
     //we added a return statement and removed that shitty else because agr user mil gaya to return ho jega aur us return k neeche ka code chlega hi nhi......so we can avoid that else part
-    const user = await new User({
-      username: req.body.username,
+    const newUser = await new User({
       email: req.body.email,
-      password: req.body.password,
+      username: req.body.username,
       mobile: req.body.mobile,
       city: req.body.city,
+      password: req.body.password,
     }).save();
-    done(null, user);
-    console.log("Thanks for your registration!!");
+
+    return res.json({ msg: null, user: newUser });
   });
 
   app.post("/api/login", async (req, res, done) => {
-    const username = req.body.email;
-    const password = req.body.password;
-
-    const existingUser = await User.findOne({ email: username });
+    const existingUser = await User.findOne(
+      { email: req.body.email, password: req.body.password },
+      "username email mobile city"
+    ).exec();
 
     if (existingUser) {
-      if (existingUser.password === password) {
-        console.log("You have been logged in successfully!!");
-      } else {
-        console.log("Incorrect password!!");
-      }
+      return res.json({ msg: null, user: existingUser });
     } else {
-      console.log("You are not registered with us!!");
+      return res.json({ msg: "Invalid Credentials", user: null });
     }
   });
 
-  app.get("/api/logout", (req, res) => {
-    req.logout();
-
-    console.log("Logged out");
-    res.send(req.user);
-  });
+  // app.get("/api/logout", (req, res) => {
+  //   req.logout();
+  //   res.redirect("/");
+  // });
 };

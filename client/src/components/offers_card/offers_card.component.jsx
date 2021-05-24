@@ -1,17 +1,21 @@
 import React from "react";
-
+import { useHistory } from "react-router";
 import "./offers_card.styles.css";
 
-const OffersCard = ({ imagesrc }) => (
-  <div class="bg-image hover-overlay  hover-shadow ripple offer_card">
-    <img src={imagesrc} class="offer_image w-100" alt="" />
-  
+const OffersCard = ({ imagesrc, imagelink }) => {
+  const history = useHistory();
+  return (
+    <div
+      class="bg-image hover-overlay  hover-shadow ripple offer_card"
+      onClick={() => history.push(imagelink)}
+    >
+      <img src={imagesrc} class="offer_image w-100" alt="" />
       <div
         class="mask"
         style={{ backgroundColor: "rgba(57, 192, 237, 0.2)" }}
       ></div>
-
-  </div>
+    </div>
+  );
 
   //   {/* I M OFFERS CARD */}
   //   {/* <Card className="offer_card" style={{}}>
@@ -25,6 +29,6 @@ const OffersCard = ({ imagesrc }) => (
   //       </Card.Body> */}
 
   //   {/* </Card> */}
-);
+};
 
 export default OffersCard;

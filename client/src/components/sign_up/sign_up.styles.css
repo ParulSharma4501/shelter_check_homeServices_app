@@ -55,6 +55,7 @@
 
 .signup_form_google {
   margin-bottom: 17px;
+  cursor: pointer;
 }
 
 .signup_form_group {
@@ -70,7 +71,7 @@
 }
 
 .signup_form_icons {
-  color: rgb(153, 153, 153);
+  color: rgb(153, 153, 153) !important;
   font-size: 1.1rem !important;
 }
 
@@ -160,4 +161,12 @@
 .hvr-underline-reveal:active:before {
   -webkit-transform: translateY(0);
   transform: translateY(0);
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .signup {
+    flex-direction: column;
+    margin: -10%;
+  }
 }

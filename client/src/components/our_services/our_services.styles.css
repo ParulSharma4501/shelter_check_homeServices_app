@@ -26,3 +26,10 @@
     margin-bottom: 1.2%;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .our_services {
+    width: 95%;
+  }
+}

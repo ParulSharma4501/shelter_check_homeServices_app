@@ -39,3 +39,18 @@
 .rec-item-wrapper {
   padding: 10% 0% !important;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .image_row {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .image_row > div {
+    margin: 0px;
+    text-align: center;
+    font-size: 30px;
+  }
+}

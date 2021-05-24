@@ -8,9 +8,13 @@ import IconDetails from "../.././icon_details";
 
 function createCard(icon) {
   return (
-    <a href={icon.link}>
-      <IconCard key={icon.id} iconsrc={icon.imgURL} iconname={icon.name} />
-      </a>)
+    <IconCard
+      key={icon.id}
+      iconsrc={icon.imgURL}
+      iconname={icon.name}
+      iconlink={icon.link}
+    />
+  );
 }
 
 const IconRow = ({ start, end }) => (

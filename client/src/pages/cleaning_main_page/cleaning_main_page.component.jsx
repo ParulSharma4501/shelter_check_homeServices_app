@@ -5,15 +5,15 @@ import CleaningBox from "../../components/cleaning_box/cleaning_box.component";
 
 import "./cleaning_main_page.styles.css";
 
-const CleaningMainPage = (props) => {
-    console.log(props);
+const CleaningMainPage = ({CommonCleaningProps}) => {
+    console.log(CommonCleaningProps);
 
     return (
 
     <div className="CleaningMainPage">
         <div class="flex-containerc">
             <div>
-                    <CleaningBox typ={props.typee} one={props.one} two={props.two} three={props.three} four={ props.four}/>
+                    <CleaningBox CommonCleaningProps={ CommonCleaningProps}/>
             </div>
           
 </div>

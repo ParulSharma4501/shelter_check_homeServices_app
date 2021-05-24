@@ -33,3 +33,11 @@
   margin-left: auto;
   /* background-color: rgb(255, 127, 238); */
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .appliance_image_card {
+    margin: auto;
+  }
+}

@@ -1,18 +1,28 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+const expressSession = require("express-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
+require("./models/Professional");
 require("./services/passport");
+
+const app = express();
+const cors = require("cors");
+
+// app.use(
+//   expressSession({
+//     secret: "Our Little Secret.",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-const app = express();
-const cors = require("cors");
 
 app.use(
   cookieSession({
@@ -28,6 +38,7 @@ app.use(cors());
 app.use(express.json());
 
 require("./routes/authRoutes")(app);
+require("./routes/registerProRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 

@@ -47,3 +47,12 @@
   background: none;
   border: 1px solid white;
 }
+
+@media only screen and (max-width: 768px) {
+  .signup_login_side {
+    height: 250px;
+    margin-top: 7%;
+    margin-bottom: 7%;
+  }
+  /* For mobile phones: */
+}

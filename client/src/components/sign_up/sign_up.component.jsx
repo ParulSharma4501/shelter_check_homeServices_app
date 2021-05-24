@@ -1,17 +1,39 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import validator from "validator";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../../redux/actions";
 import { Form, Button } from "react-bootstrap";
+import { IconButton, InputAdornment } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PersonIcon from "@material-ui/icons/Person";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import PhoneIcon from "@material-ui/icons/Phone";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import SignupLoginSide from "../signup_login_side/signup_login_side.component";
 
-import google from "../../assets/search.png";
+// import google from "../../assets/search.png";
 import "./sign_up.styles.css";
 
 function SignupForm() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const authObject = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (authObject.msg === "You are already registered please login")
+      alert(authObject.msg);
+    else if (authObject.user) {
+      history.push("/landing");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authObject]);
+
+  // const signedupUser = useSelector(selectUser);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [input, setInput] = useState({
     username: "",
     email: "",
@@ -19,6 +41,15 @@ function SignupForm() {
     mobile: "",
     city: "",
   });
+
+  const [values, setValues] = useState({
+    password: "",
+    showPassword: false,
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -33,15 +64,34 @@ function SignupForm() {
   function handleSubmit(event) {
     event.preventDefault();
     const newUser = {
-      username: input.username,
       email: input.email,
+      username: input.name,
       password: input.password,
       mobile: input.mobile,
       city: input.city,
     };
-    axios.post("/api/register", newUser);
+    dispatch(signupUser(newUser));
   }
 
+  function validate(event) {
+    // console.log(document.querySelector(".signup_form_password"));
+    const password = event.target.value;
+    if (
+      validator.isStrongPassword(password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setErrorMessage(
+        "Password must have a minimum length of 8 characters, a lower case, a number, a symbol and an Upper case letter as well"
+      );
+    }
+  }
+
+  // ""
   return (
     <div className="signup">
       <SignupLoginSide
@@ -56,9 +106,10 @@ function SignupForm() {
           <h2>
             <b>Create Account</b>
           </h2>
-          <p>or use your Google account instead</p>
+          {/* <p>or use your Google account instead</p> */}
         </div>
-        <a href="/auth/google" className="signup_form_google">
+        <br />
+        {/* <a href="/auth/google" className="signup_form_google">
           <img
             src={google}
             height="30"
@@ -66,7 +117,7 @@ function SignupForm() {
             alt="Google Logo"
             content="default-src 'self' style-src 'self' 'unsafe-inline';"
           />
-        </a>
+        </a> */}
         <Form.Group
           controlId="formBasicName"
           className="signup_form_group hvr-underline-reveal"
@@ -74,10 +125,11 @@ function SignupForm() {
           <PersonIcon className="signup_form_icons" />
           <Form.Control
             type="name"
-            name="username"
+            name="name"
             placeholder="Enter name"
             className="signup_form_control"
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -92,6 +144,7 @@ function SignupForm() {
             className="signup_form_control"
             onChange={handleChange}
             name="email"
+            required
           />
         </Form.Group>
 
@@ -102,14 +155,25 @@ function SignupForm() {
           {/* <Form.Label className="signup_form_label">Password</Form.Label> */}
           <LockOpenIcon className="signup_form_icons" />
           <Form.Control
-            type="password"
+            type={values.showPassword ? "text" : "password"}
             name="password"
             placeholder="Enter password"
-            className="signup_form_control"
+            className="signup_form_control signup_form_password"
             onChange={handleChange}
+            required
+            value={input.password}
+            onBlur={validate}
           />
+          <InputAdornment position="end">
+            <IconButton onClick={handleClickShowPassword}>
+              {values.showPassword ? (
+                <Visibility className="signup_form_icons" />
+              ) : (
+                <VisibilityOff className="signup_form_icons" />
+              )}
+            </IconButton>
+          </InputAdornment>
         </Form.Group>
-
         <Form.Group
           controlId="formGridMobile"
           className="signup_form_group hvr-underline-reveal"
@@ -122,6 +186,7 @@ function SignupForm() {
             placeholder="Enter mobile"
             className="signup_form_control"
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -137,6 +202,7 @@ function SignupForm() {
             placeholder="Enter city"
             className="signup_form_control"
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -147,10 +213,10 @@ function SignupForm() {
         >
           SignUp
         </Button>
+        <span style={{ color: "red" }}>{errorMessage}</span>
       </Form>
     </div>
   );
 }
 
 export default SignupForm;
-//HA AAJ HI PTA LGA THA MJHE SUBH CAPTIAL HONA CHAHIYE PHLA LETTER

@@ -4,6 +4,9 @@
   padding-top: 30px;
   background-image: url(../../assets/white4.png);
   background-size: cover;
+
+  /* background-image: url("../../assets//landing3.jpg");
+  background-size: cover; */
 }
 
 @media only screen and (min-width: 1400px) {

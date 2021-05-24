@@ -5,19 +5,15 @@ import DecorBox from "../../components/decor_box/decor_box.component";
 
 import "./decor_main_page.styles.css";
 
-const DecorMainPage = (props) => {
-  console.log(props);
+const DecorMainPage = ({CommonDecorProps}) => {
+  console.log(CommonDecorProps);
 
   return (
     <div className="DecorMainPage">
       <div class="flex-containerd">
         <div>
           <DecorBox
-            typ={props.typee}
-            one={props.one}
-            two={props.two}
-            three={props.three}
-            four={props.four}
+           CommonDecorProps={CommonDecorProps}
           />
         </div>
       </div>

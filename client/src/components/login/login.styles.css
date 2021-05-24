@@ -161,3 +161,14 @@
   -webkit-transform: translateY(0);
   transform: translateY(0);
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .login {
+    flex-direction: column;
+    margin: -10%;
+  }
+  .login_form {
+    height: 750px;
+  }
+}

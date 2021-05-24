@@ -1,6 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-// import { Switch, Route, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -12,165 +11,123 @@ import SalonMainPage from "./pages/salon_main_page/salon_main_page.component";
 import CleaningMainPage from "./pages/cleaning_main_page/cleaning_main_page.component";
 import DecorMainPage from "./pages/decor_main_page/decor_main_page.component";
 import GadgetMainPage from "./pages/gadget_main_page/gadget_main_page.component";
+import CheckoutPage from "./pages/checkout_page/checkout_page.component";
+
+import CommonCleaningProps from "./commonProps/commonCleaningProps";
+import CommonSalonProps from "./commonProps/commonSalonProps";
+import CommonDecorProps from "./commonProps/commonDecorProps";
+import CommonGadgetProps from "./commonProps/commonGadgetProps";
+import LandingPage from "./pages/landing_page/landing_page.component";
 
 function App() {
-  // const { salonType } = useParams();
-  console.log("hey");
+  // const signedUser = useSelector((state) => state.auth.user);
+  // const history = useHistory();
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(googleUser());
+  //   signedUser ? history.push("/landing") : history.push("/");
+  // }, [App]);
 
   return (
     <div className="App">
       {/*  SWITCH--  the moment it finds a match it stops there and does not render any other route component. */}
       {/* EXACT-- it has two things ={true}, ={false} default is true and it should be EXACTLY matched. */}
-      <Switch>
-        <Route exact path="/" component={Homepage}></Route>
-        <Route path="/signup">
-          {/* <NavbarElse /> */}
-          <SignUpPage />
-        </Route>
-        <Route path="/login">
-          {/* <NavbarElse /> */}
-          <LoginPage />
-        </Route>
-        <Route path="/professional">
-          {/* <NavbarElse /> */}
-          <ProfessionalPage />
-        </Route>
-        <Route exact path="/salonmainpage">
-          <SalonMainPage />
-        </Route>
-        {/* <Route path="/salonmainpage/:salonType" render>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/landing">
+            <Homepage />
+          </Route>
+          <Route path="/signup">
+            <SignUpPage />
+          </Route>
+          <Route path="/professional">
+            <ProfessionalPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+
+          {/* <Route path="/salonmainpage/:salonType" render>
      
           <SalonMainPage typee={salonType} />
         </Route> */}
 
-        {/* Salon Routes------------------------------------------------------------ */}
-        <Route path="/salonmainpage/Massage">
-          <SalonMainPage
-            typee="Massage"
-            one="Full Body Massage"
-            two="Face Massage"
-            three="Accupressure"
-            four="Fish Massage"
-          />
-        </Route>
-        <Route path="/salonmainpage/Grooming">
-          <SalonMainPage
-            typee="Grooming"
-            one="Waxing"
-            two="Threading"
-            three="Manicure/Padicure"
-            four="Waxing"
-          />
-        </Route>
-        <Route path="/salonmainpage/Skin">
-          <SalonMainPage
-            typee="Skin Care"
-            one="Facial"
-            two="Full Skin Refresher Skincare"
-            three="Bridal Makeup"
-            four="Normal Makeup"
-          />
-        </Route>
-        <Route path="/salonmainpage/Salon">
-          <SalonMainPage
-            typee="Hair Care Salon"
-            one="Haircut"
-            two="Hair Styling"
-            three="Hair Treatment"
-            four="Waxing"
-          />
-        </Route>
+          {/* Salon Routes------------------------------------------------------------ */}
 
-        {/* Cleaning Routes------------------------------------------------------------ */}
-        <Route path="/cleaningmainpage/Car">
-          <CleaningMainPage
-            typee="Car Cleaning"
-            one="Waterless Car Wash. Rinseless Car Wash."
-            two="Soft Touch Car Washes."
-            three="Automated Car Washes."
-            four="Machine Dryer Car Wash."
-          />
-        </Route>
-        <Route path="/cleaningmainpage/Termite">
-          <CleaningMainPage
-            typee="Termite Control"
-            one="Liquid soil-applied termiticides."
-            two="Termite baits."
-            three="Building materials impregnated with termiticides."
-            four="Wood treatments."
-          />
-        </Route>
-        <Route path="/cleaningmainpage/Furniture">
-          <CleaningMainPage
-            typee="Furniture Cleaning"
-            one="Sofa Cleaning"
-            two="Wooden Furniture Cleaning"
-            three="Foam Cleaning of whole house"
-            four="Dry Cleaning of whole house"
-          />
-        </Route>
-        <Route path="/cleaningmainpage/Bathroom">
-          <CleaningMainPage
-            typee="Rooms Cleaning"
-            one="Bathroom Cleaning"
-            two="Kitchen Cleaning"
-            three="Gel-Based Toilet Cleaning"
-            four="Tile Cleaning"
-          />
-        </Route>
+          <Route exact path="/salonmainpage">
+            <SalonMainPage />
+          </Route>
 
-        {/* Decoration Routes------------------------------------------------------------ */}
-        <Route path="/decormainpage/birthday">
-          <DecorMainPage
-            typee="Birthday Decor"
-            one="Ballons Decor."
-            two="Flowers Decor."
-            three="Confetti Decor."
-            four="Decor Custumized Specially for you."
-          />
-        </Route>
-        <Route path="/decormainpage/wedding">
-          <DecorMainPage
-            typee="Wedding Decor"
-            one="Contemporary style."
-            two="Diyas and Candles Decor."
-            three="Colourful drapes."
-            four="Decor Custumized Specially for you."
-          />
-        </Route>
-        <Route path="/decormainpage/gardening">
-          <DecorMainPage
-            typee="Gardening Decor"
-            one="Formal Garden."
-            two="Japanese Garden."
-            three="Modern Garden."
-            four="Gravel And Rock Garden."
-          />
-        </Route>
-        <Route path="/decormainpage/wholehouse">
-          <DecorMainPage
-            typee="House Renovation"
-            one="Scandinavian."
-            two="Mid-century modern."
-            three="Contemporary."
-            four="Traditional."
-          />
-        </Route>
+          <Route path="/salonmainpage/Massage">
+            <SalonMainPage CommonSalonProps={CommonSalonProps[0]} />
+          </Route>
 
-        {/* Decoration Routes------------------------------------------------------------ */}
-        <Route path="/gadgetmainpage/led">
-          <GadgetMainPage typee="LED Service" />
-        </Route>
-        <Route path="/gadgetmainpage/ac">
-          <GadgetMainPage typee="AC Service" />
-        </Route>
-        <Route path="/gadgetmainpage/laptop">
-          <GadgetMainPage typee="Laptop Service" />
-        </Route>
-        <Route path="/gadgetmainpage/washingmachine">
-          <GadgetMainPage typee="Washing Machine Service" />
-        </Route>
-      </Switch>
+          <Route path="/salonmainpage/Grooming">
+            <SalonMainPage CommonSalonProps={CommonSalonProps[1]} />
+          </Route>
+          <Route path="/salonmainpage/Skin">
+            <SalonMainPage CommonSalonProps={CommonSalonProps[2]} />
+          </Route>
+          <Route path="/salonmainpage/Salon">
+            <SalonMainPage CommonSalonProps={CommonSalonProps[3]} />
+          </Route>
+
+          {/* Cleaning Routes------------------------------------------------------------ */}
+          <Route path="/cleaningmainpage/Car">
+            <CleaningMainPage CommonCleaningProps={CommonCleaningProps[0]} />
+          </Route>
+          <Route path="/cleaningmainpage/Termite">
+            <CleaningMainPage CommonCleaningProps={CommonCleaningProps[1]} />
+          </Route>
+          <Route path="/cleaningmainpage/Furniture">
+            <CleaningMainPage CommonCleaningProps={CommonCleaningProps[2]} />
+          </Route>
+          <Route path="/cleaningmainpage/Bathroom">
+            <CleaningMainPage CommonCleaningProps={CommonCleaningProps[3]} />
+          </Route>
+
+          {/* Decoration Routes------------------------------------------------------------ */}
+          <Route path="/decormainpage/birthday">
+            <DecorMainPage CommonDecorProps={CommonDecorProps[0]} />
+          </Route>
+          <Route path="/decormainpage/wedding">
+            <DecorMainPage CommonDecorProps={CommonDecorProps[1]} />
+          </Route>
+          <Route path="/decormainpage/gardening">
+            <DecorMainPage CommonDecorProps={CommonDecorProps[2]} />
+          </Route>
+          <Route path="/decormainpage/wholehouse">
+            <DecorMainPage CommonDecorProps={CommonDecorProps[3]} />
+          </Route>
+
+          {/* Decoration Routes------------------------------------------------------------ */}
+          <Route path="/gadgetmainpage/led">
+            <GadgetMainPage CommonGadgetProps={CommonGadgetProps[0]} />
+          </Route>
+          <Route path="/gadgetmainpage/ac">
+            <GadgetMainPage CommonGadgetProps={CommonGadgetProps[1]} />
+          </Route>
+          <Route path="/gadgetmainpage/laptop">
+            <GadgetMainPage CommonGadgetProps={CommonGadgetProps[2]} />
+          </Route>
+          <Route path="/gadgetmainpage/washingmachine">
+            <GadgetMainPage CommonGadgetProps={CommonGadgetProps[3]} />
+          </Route>
+
+          {/* --------------------------------------------------------------------------------------- */}
+
+          <Route path="/checkout">
+            <CheckoutPage />
+          </Route>
+
+          {/* render={(props) => <CheckoutPage {...props} />} */}
+        </Switch>
+        {/* )} */}
+      </Router>
     </div>
   );
 }

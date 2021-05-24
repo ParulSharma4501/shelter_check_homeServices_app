@@ -17,50 +17,45 @@ import ReviewDetails from "../../review_details";
 
 function createApplianceCard(image) {
   return (
-    <a   href={`/gadgetmainpage/${image.link}`}>
     <ApplianceImageCard
       key={image.id}
       imagesrc={image.imgURL}
       imagename={image.name}
-      />
-      </a>
+      imagelink={`/gadgetmainpage/${image.link}`}
+    />
   );
 }
 
 function createDecorCard(image) {
   return (
-    <a   href={`/decormainpage/${image.link}`}>
     <DecorImageCard
       key={image.id}
       imagesrc={image.imgURL}
       imagename={image.name}
+      imagelink={`/decormainpage/${image.link}`}
     />
-    </a>
   );
 }
 
 function createCleaningCard(image) {
   return (
-    <a href={`/cleaningmainpage/${image.link}`}>
     <CleaningImageCard
       key={image.id}
       imagesrc={image.imgURL}
       imagename={image.name}
+      imagelink={`/cleaningmainpage/${image.link}`}
     />
-    </a>
   );
 }
 
 function createSalonCard(image) {
   return (
-    <a   href={`/salonmainpage/${image.link}`}>
     <SalonImageCard
       key={image.id}
       imagesrc={image.imgURL}
       imagename={image.name}
-    
-      />
-      </a>
+      imagelink={`/salonmainpage/${image.link}`}
+    />
   );
 }
 

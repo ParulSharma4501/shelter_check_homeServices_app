@@ -22,7 +22,7 @@
 }
 
 .feature_card_title {
-  font-family: sans-serif;
+  font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 23px;
@@ -32,4 +32,5 @@
 .feature_card_text {
   color: #969696;
   font-size: 14px;
+  font-family: Open Sans;
 }

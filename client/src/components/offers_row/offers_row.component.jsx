@@ -4,7 +4,7 @@ import OffersCard from "../offers_card/offers_card.component";
 
 import "./offers_row.styles.css";
 
-import OffersDetails from "../../offers_details";
+import OffersDetails from "../../details-js/offers_details";
 
 function createOffersCard(iconn) {
   return (

@@ -9,11 +9,11 @@ import CleaningImageCard from "../cleaning_image_card/cleaning_image_card.compon
 import SalonImageCard from "../salon_image_card/salon_image_card.component";
 import ReviewCard from "../review_card/review_card.component";
 
-import ApplianceImageDetails from "../.././appliance_image_details";
-import DecorImageDetails from "../.././decor_image_details";
-import CleaningImageDetails from "../../cleaning_image_details";
-import SalonImageDetails from "../../salon_image_details";
-import ReviewDetails from "../../review_details";
+import ApplianceImageDetails from "../../details-js/appliance_image_details";
+import DecorImageDetails from "../../details-js/decor_image_details";
+import CleaningImageDetails from "../../details-js/cleaning_image_details";
+import SalonImageDetails from "../../details-js/salon_image_details";
+import ReviewDetails from "../../details-js/review_details";
 
 function createApplianceCard(image) {
   return (

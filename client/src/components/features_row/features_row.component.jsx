@@ -1,6 +1,6 @@
 import React from "react";
 import FeaturesCard from "../features_card/features_card.component";
-import KeyFeatures from "../.././features_details";
+import KeyFeatures from "../../details-js/features_details";
 
 import "./features_row.styles.css";
 

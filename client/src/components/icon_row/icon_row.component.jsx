@@ -4,7 +4,7 @@ import "./icon_row.styles.css";
 
 import IconCard from "../icon_card/icon_card.component";
 
-import IconDetails from "../.././icon_details";
+import IconDetails from "../../details-js/icon_details";
 
 function createCard(icon) {
   return (
